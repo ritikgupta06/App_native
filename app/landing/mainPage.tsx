@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ActivityIndicator, ScrollView, ImageBackground } from 'react-native';
 import axios from 'axios';
 
 const MainPage: React.FC = () => {
@@ -20,34 +20,44 @@ const MainPage: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}></Text>
+    <ImageBackground
+      source={require('../../assets/images/appbg.jpg')} // Replace with your image path
+      style={styles.backgroundImage}
+    >
+      <View style={styles.container}>
+        <Text style={styles.heading}></Text>
 
-      <ScrollView style={styles.contentContainer}>
-        {loading ? (
-          <ActivityIndicator size="large" color="#0000ff" style={styles.loading} />
-        ) : (
-          content && <Text style={styles.contentDisplay}>{content}</Text>
-        )}
-      </ScrollView>
+        <ScrollView style={styles.contentContainer}>
+          {loading ? (
+            <ActivityIndicator size="large" color="#0000ff" style={styles.loading} />
+          ) : (
+            content && <Text style={styles.contentDisplay}>{content}</Text>
+          )}
+        </ScrollView>
 
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          value={question}
-          onChangeText={setQuestion}
-          placeholder="Ask your Mitra to solve your problem"
-          onSubmitEditing={handleFetchContent} // Handle Enter key press
-        />
-        <TouchableOpacity style={styles.button} onPress={handleFetchContent}>
-          <Text style={styles.buttonText}>Send</Text>
-        </TouchableOpacity>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            value={question}
+            onChangeText={setQuestion}
+            placeholder="Message"
+            onSubmitEditing={handleFetchContent} // Handle Enter key press
+          />
+          <TouchableOpacity style={styles.button} onPress={handleFetchContent}>
+            <Text style={styles.buttonText}>Send</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover', // or 'stretch' to cover the entire screen
+    justifyContent: 'center',
+  },
   container: {
     flex: 1,
     padding: 16,
@@ -74,8 +84,8 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    borderColor: '#ccc',
-    borderWidth: 1,
+    borderColor: 'black',
+    borderWidth: 1.3,
     borderRadius: 15,
     padding: 9,
     marginRight: 3,
@@ -84,7 +94,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 15,
+    borderRadius: 20,
   },
   buttonText: {
     color: 'white',
