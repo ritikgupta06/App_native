@@ -1,9 +1,12 @@
-import { Stack } from "expo-router";
+import React from 'react';
+import { Stack } from 'expo-router';
 
-export default function RootLayout() {
+const RootLayout: React.FC = () => {
   return (
-    <Stack>
-      <Stack.Screen name="index" />
+    <Stack screenOptions={{ headerShown: false }}>
+      {/* Stack will automatically detect screens based on the folder structure */}
     </Stack>
   );
-}
+};
+
+export default RootLayout;
